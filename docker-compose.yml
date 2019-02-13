@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  dockercomposemulti:
+    image: ${DOCKER_REGISTRY-}dockercomposemulti
+    build:
+      context: .\DockerComposeMulti
+      dockerfile: Dockerfile
