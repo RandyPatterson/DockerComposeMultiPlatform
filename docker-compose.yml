@@ -1,8 +1,24 @@
-version: '3.4'
+version: '2.4'
 
 services:
-  dockercomposemulti:
-    image: ${DOCKER_REGISTRY-}dockercomposemulti
+  webtier:
+    image: webtier:win
+    platform: windows
+    ports:
+      - 80
     build:
-      context: .\DockerComposeMulti
+      context: .\WebTier
+      dockerfile: Dockerfile
+    depends_on:
+      - apitier
+    environment:
+      ApiHost: "apitier"
+
+  apitier:
+    image: apitier:linux
+    platform: linux
+    expose: 
+      - 80
+    build:
+      context: .\ApiTier
       dockerfile: Dockerfile
